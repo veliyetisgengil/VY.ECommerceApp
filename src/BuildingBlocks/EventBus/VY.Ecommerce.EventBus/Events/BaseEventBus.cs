@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ using VY.Ecommerce.EventBus.Base.SubManagers;
 
 namespace VY.Ecommerce.EventBus.Base.Events
 {
-    public class BaseEventBus : IEventBus
+    public abstract class BaseEventBus : IEventBus
     {
         public readonly IServiceProvider ServiceProvider;
         public readonly IEventBusSubscriptionManager SubsManager;
@@ -44,28 +46,41 @@ namespace VY.Ecommerce.EventBus.Base.Events
 
             var processed = false;
 
+            if (SubsManager.HasSubscriptionForEvent(eventName))
+            {
+                var subscriptions = SubsManager.GetHandlersForEvent(eventName);
 
+                using (var scope = ServiceProvider.CreateScope())
+                {
+                    foreach (var subscription in subscriptions)
+                    {
+                        var handler = ServiceProvider.GetService(subscription.HandlerType);
+                        if (handler == null) continue;
+
+                        var eventType = SubsManager.GetEventTypeByName($"{eventBusConfig.EventNamePrefix}{eventName}{eventBusConfig.EventNameSuffix}");
+                        var integrationEvent = JsonConvert.DeserializeObject(message, eventType);
+
+                        //if(integrationEvent is IntegrationEvent)
+                        //{
+                        //    eventBusConfig.CorrelationIdSetter?.Invoke((integrationEvent as IntegrationEvent).CorrelationId);
+                        //}
+
+                        var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { integrationEvent});
+                    }
+
+                }
+                processed = true;
+            }
 
             return processed;
         }
 
-        public void Publish(IntegrationEvent @event)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Publish(IntegrationEvent @event);
 
-        public void Subscribe<T, TH>()
-            where T : IntegrationEvent
-            where TH : IIntegrationEventHandler<T>
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Subscribe<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
 
-        public void UnSubscribe<T, TH>()
-            where T : IntegrationEvent
-            where TH : IIntegrationEventHandler<T>
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void UnSubscribe<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
+        
     }
 }
