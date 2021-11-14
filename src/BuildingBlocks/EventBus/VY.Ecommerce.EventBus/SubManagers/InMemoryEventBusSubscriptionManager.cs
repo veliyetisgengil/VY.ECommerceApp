@@ -124,5 +124,7 @@ namespace VY.Ecommerce.EventBus.Base.SubManagers
             }
             return _handlers[eventName].SingleOrDefault(s=>s.HandlerType == handlerType);
         }
+
+       
     }
 }
