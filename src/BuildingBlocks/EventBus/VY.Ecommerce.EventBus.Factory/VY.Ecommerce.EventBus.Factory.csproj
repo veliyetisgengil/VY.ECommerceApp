@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VY.Ecommerce.EventBus.AzureServiceBus\VY.Ecommerce.EventBus.AzureServiceBus.csproj" />
+    <ProjectReference Include="..\VY.Ecommerce.EventBus.RabbitMQ\VY.Ecommerce.EventBus.RabbitMQ.csproj" />
+    <ProjectReference Include="..\VY.Ecommerce.EventBus\VY.Ecommerce.EventBus.Base.csproj" />
+  </ItemGroup>
+
 </Project>
