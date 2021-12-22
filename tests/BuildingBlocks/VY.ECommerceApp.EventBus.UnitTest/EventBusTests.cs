@@ -94,7 +94,7 @@ namespace VY.EcommerceApp.EventBus.UnitTest
                 DefaultTopicName = "SellingBuddyTopicName",
                 EventBusType = EventBusType.AzureServiceBus,
                 EventNameSuffix = "IntegrationEvent",
-                EventBusConnectionString = "Endpoint=sb://eyecommerce.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cDadbRXOxa0UxNilPvL83le0aIyoP1FKB1Yocd8JSfg="
+                EventBusConnectionString = "Endpoint=sb://eyecommerce.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=i7FIPF/k2mham0JM6hm/uVP5H+1Bm9Wz527fS++mdRo="
             };
         }
         private EventBusConfig GetRabbitMqConfig()
