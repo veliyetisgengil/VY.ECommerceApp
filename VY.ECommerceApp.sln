@@ -64,7 +64,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VY.Ecommerce.OrderService.A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PaymentService", "PaymentService", "{CD5F243E-7933-4E85-8A1F-8FA70C61B67D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VY.Ecommerce.PaymentService.Api", "src\Services\PaymentService\VY.Ecommerce.PaymentService.Api\VY.Ecommerce.PaymentService.Api.csproj", "{8C91F9A8-60DA-4520-9A2D-43CF280F1736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VY.Ecommerce.PaymentService.Api", "src\Services\PaymentService\VY.Ecommerce.PaymentService.Api\VY.Ecommerce.PaymentService.Api.csproj", "{8C91F9A8-60DA-4520-9A2D-43CF280F1736}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6A3718A1-DCDD-4F8B-BCFC-01A13F5B66F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{C3D49DC6-4F37-46FF-8046-D9AC2B4B7F13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VY.ECommerceApp.EventBus.UnitTest", "tests\BuildingBlocks\VY.ECommerceApp.EventBus.UnitTest\VY.ECommerceApp.EventBus.UnitTest.csproj", "{C3461F52-E65A-4F92-A6BA-43EC12442D9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -132,6 +138,10 @@ Global
 		{8C91F9A8-60DA-4520-9A2D-43CF280F1736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C91F9A8-60DA-4520-9A2D-43CF280F1736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C91F9A8-60DA-4520-9A2D-43CF280F1736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3461F52-E65A-4F92-A6BA-43EC12442D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3461F52-E65A-4F92-A6BA-43EC12442D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3461F52-E65A-4F92-A6BA-43EC12442D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3461F52-E65A-4F92-A6BA-43EC12442D9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +175,8 @@ Global
 		{156C84F8-4E5C-49E6-A810-5AE5DD5D143C} = {2271E2F9-6A8C-44F3-BA33-43DAC741A6FD}
 		{CD5F243E-7933-4E85-8A1F-8FA70C61B67D} = {FE2C8D67-D607-44C0-A670-7C487B6A1D53}
 		{8C91F9A8-60DA-4520-9A2D-43CF280F1736} = {CD5F243E-7933-4E85-8A1F-8FA70C61B67D}
+		{C3D49DC6-4F37-46FF-8046-D9AC2B4B7F13} = {6A3718A1-DCDD-4F8B-BCFC-01A13F5B66F4}
+		{C3461F52-E65A-4F92-A6BA-43EC12442D9C} = {C3D49DC6-4F37-46FF-8046-D9AC2B4B7F13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90CA14EC-3B30-47AC-8470-3D8A40BEA8D0}
