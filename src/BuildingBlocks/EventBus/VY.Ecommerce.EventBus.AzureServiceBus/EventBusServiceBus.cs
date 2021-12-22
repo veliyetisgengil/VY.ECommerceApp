@@ -21,6 +21,7 @@ namespace VY.Ecommerce.EventBus.AzureServiceBus
         {
             logger = serviceProvider.GetService(typeof(ILogger<EventBusServiceBus>)) as ILogger<EventBusServiceBus>;
             managementClient = new ManagementClient(config.EventBusConnectionString);
+            topicClient = CreateTopicClient();
         }
 
         private ITopicClient CreateTopicClient()

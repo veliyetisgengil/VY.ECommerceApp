@@ -13,7 +13,7 @@ namespace VY.EcommerceApp.EventBus.UnitTest
     [TestClass]
     public class EventBusTests
     {
-        private ServiceCollection services; 
+        private ServiceCollection services;
         public EventBusTests()
         {
             this.services = new ServiceCollection();
@@ -25,47 +25,7 @@ namespace VY.EcommerceApp.EventBus.UnitTest
         {
             services.AddSingleton<IEventBus>(sp =>
             {
-                EventBusConfig config = new()
-                {
-                    ConnectionRetryCount = 5,
-                    SubscriberClientAppName = "EventBusUnitTest",
-                    DefaultTopicName = "SellingBuddyTopicName",
-                    EventBusType = EventBusType.RabbitMQ,
-                    EventNameSuffix = "IntegrationEvent",
-                    //Connection = new ConnectionFactory()
-                    //{
-                    //    HostName = "localhost",
-                    //    Port = 5672,
-                    //    UserName = "guest",
-                    //    Password = "guest"
-                    //}
-                };
-                return EventBusFactory.Create(config,sp);
-            });
-
-            var sp = services.BuildServiceProvider();
-
-            var eventBus = sp.GetRequiredService<IEventBus>();
-
-            eventBus.Subscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
-            eventBus.UnSubscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
-
-        }
-
-        [TestMethod]
-        public void subscribe_event_on_azure_test()
-        {
-            services.AddSingleton<IEventBus>(sp =>
-            {
-                EventBusConfig config = new()
-                {
-                    ConnectionRetryCount = 5,
-                    SubscriberClientAppName = "EventBusUnitTest",
-                    DefaultTopicName = "SellingBuddyTopicName",
-                    EventBusType = EventBusType.AzureServiceBus,
-                    EventNameSuffix = "IntegrationEvent",
-                    EventBusConnectionString = "Endpoint=sb://eyecommerce.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cDadbRXOxa0UxNilPvL83le0aIyoP1FKB1Yocd8JSfg="
-                };
+                EventBusConfig config = GetRabbitMqConfig();
                 return EventBusFactory.Create(config, sp);
             });
 
@@ -76,6 +36,77 @@ namespace VY.EcommerceApp.EventBus.UnitTest
             eventBus.Subscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
             eventBus.UnSubscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
 
+        }
+        [TestMethod]
+        public void send_message_to_rabbitmq_test()
+        {
+            services.AddSingleton<IEventBus>(sp =>
+            {
+                EventBusConfig config = GetRabbitMqConfig();
+                return EventBusFactory.Create(config, sp);
+            });
+
+            var sp = services.BuildServiceProvider();
+
+            var eventBus = sp.GetRequiredService<IEventBus>();
+
+            eventBus.Publish(new OrderCreatedIntegrationEvent(1));
+        }
+        [TestMethod]
+        public void subscribe_event_on_azure_test()
+        {
+            services.AddSingleton<IEventBus>(sp =>
+            {
+                EventBusConfig config = GetAzureConfig();
+                return EventBusFactory.Create(config, sp);
+            });
+
+            var sp = services.BuildServiceProvider();
+
+            var eventBus = sp.GetRequiredService<IEventBus>();
+
+            eventBus.Subscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
+            eventBus.UnSubscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
+
+        }
+        [TestMethod]
+        public void send_message_to_azure_test()
+        {
+            services.AddSingleton<IEventBus>(sp =>
+            {
+                EventBusConfig config = GetAzureConfig();
+                return EventBusFactory.Create(config, sp);
+            });
+
+            var sp = services.BuildServiceProvider();
+
+            var eventBus = sp.GetRequiredService<IEventBus>();
+
+            eventBus.Publish(new OrderCreatedIntegrationEvent(1));
+        }
+
+        private EventBusConfig GetAzureConfig()
+        {
+            return new EventBusConfig()
+            {
+                ConnectionRetryCount = 5,
+                SubscriberClientAppName = "EventBusUnitTest",
+                DefaultTopicName = "SellingBuddyTopicName",
+                EventBusType = EventBusType.AzureServiceBus,
+                EventNameSuffix = "IntegrationEvent",
+                EventBusConnectionString = "Endpoint=sb://eyecommerce.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cDadbRXOxa0UxNilPvL83le0aIyoP1FKB1Yocd8JSfg="
+            };
+        }
+        private EventBusConfig GetRabbitMqConfig()
+        {
+            return new EventBusConfig()
+            {
+                ConnectionRetryCount = 5,
+                SubscriberClientAppName = "EventBusUnitTest",
+                DefaultTopicName = "SellingBuddyTopicName",
+                EventBusType = EventBusType.RabbitMQ,
+                EventNameSuffix = "IntegrationEvent",
+            };
         }
     }
 }
