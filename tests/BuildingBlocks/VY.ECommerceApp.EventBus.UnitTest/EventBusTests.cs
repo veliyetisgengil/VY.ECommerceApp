@@ -13,7 +13,7 @@ namespace VY.EcommerceApp.EventBus.UnitTest
     [TestClass]
     public class EventBusTests
     {
-        private ServiceCollection services;
+        private ServiceCollection services; 
         public EventBusTests()
         {
             this.services = new ServiceCollection();
