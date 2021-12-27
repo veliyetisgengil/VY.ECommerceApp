@@ -1,0 +1,2 @@
+﻿CatalogTypeName,CatalogBrandName,Description,Name,Price,PictureFileName,availablestock,onereorder
+T-Shirt,.Net,"Test açıklama","test anem",19.5,1.png,100,false

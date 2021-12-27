@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VY.Ecommerce.CatalogService.Api.Core.Domain;
+using VY.Ecommerce.CatalogService.Api.Infastructure.EntityConfigurations;
 
 namespace VY.Ecommerce.CatalogService.Api.Infastructure.Context
 {
@@ -22,6 +23,9 @@ namespace VY.Ecommerce.CatalogService.Api.Infastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CatalogBrandEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
         }
     }
 }

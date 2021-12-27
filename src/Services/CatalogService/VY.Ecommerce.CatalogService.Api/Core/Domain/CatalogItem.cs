@@ -15,6 +15,8 @@ namespace VY.Ecommerce.CatalogService.Api.Core.Domain
         public string PictureUrl { get; set; }
         public int CatalogBrandId { get; set; }
         public CatalogBrand CatalogBrand { get; set; }
+        public int CatalogTypeId { get; set; }
+        public CatalogBrand CatalogType { get; set; }
 
     }
 }

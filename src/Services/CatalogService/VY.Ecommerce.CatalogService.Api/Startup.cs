@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VY.Ecommerce.CatalogService.Api.Extensions;
 
 namespace VY.Ecommerce.CatalogService.Api
 {
@@ -32,6 +33,8 @@ namespace VY.Ecommerce.CatalogService.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VY.Ecommerce.CatalogService.Api", Version = "v1" });
             });
+
+            services.ConfigureDbContext(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
