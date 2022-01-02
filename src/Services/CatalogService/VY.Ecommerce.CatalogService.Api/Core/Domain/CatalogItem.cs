@@ -16,7 +16,7 @@ namespace VY.Ecommerce.CatalogService.Api.Core.Domain
         public int CatalogBrandId { get; set; }
         public CatalogBrand CatalogBrand { get; set; }
         public int CatalogTypeId { get; set; }
-        public CatalogBrand CatalogType { get; set; }
+        public CatalogType CatalogType { get; set; }
 
     }
 }

@@ -24,8 +24,9 @@ namespace VY.Ecommerce.CatalogService.Api.Infastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CatalogBrandEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
+
         }
     }
 }

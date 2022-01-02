@@ -122,7 +122,7 @@ namespace VY.Ecommerce.CatalogService.Api.Infastructure.Context
                     new CatalogItem {CatalogTypeId = 2 ,CatalogBrandId =2,Description="test acıklama1",Name="deneme name1"},
                     new CatalogItem {CatalogTypeId = 3 ,CatalogBrandId =3,Description="test acıklama2",Name="deneme name2"},
                     new CatalogItem {CatalogTypeId = 2 ,CatalogBrandId =4,Description="test acıklama3",Name="deneme name3"},
-                    new CatalogItem {CatalogTypeId = 3 ,CatalogBrandId =5,Description="test acıklama4",Name="deneme name4"},
+                    new CatalogItem {CatalogTypeId = 3 ,CatalogBrandId =1,Description="test acıklama4",Name="deneme name4"},
                     new CatalogItem {CatalogTypeId = 2 ,CatalogBrandId =4,Description="test acıklama5",Name="deneme name5"},
                     new CatalogItem {CatalogTypeId = 3 ,CatalogBrandId =2,Description="test acıklama6",Name="deneme name6"}
                 };
@@ -158,14 +158,14 @@ namespace VY.Ecommerce.CatalogService.Api.Infastructure.Context
 
             if (picturePath != null)
             {
-                DirectoryInfo directory = new DirectoryInfo(picturePath);
+                DirectoryInfo directory = new(picturePath);
                 foreach (var file in directory.GetFiles())
                 {
                     file.Delete();
                 }
 
                 string zipFileCatalogItemPictures = Path.Combine(contentPath, "CatalogItems.zip");
-                ZipFile.ExtractToDirectory(zipFileCatalogItemPictures,picturePath);
+                //ZipFile.ExtractToDirectory(zipFileCatalogItemPictures,picturePath);
             }
         }
 
